@@ -1,6 +1,10 @@
 cmake_minimum_required (VERSION 2.8.3)
 project(instantMeshes)
 
+set(CMAKE_CXX_STANDARD 11) # C++11...
+set(CMAKE_CXX_STANDARD_REQUIRED ON) #...is required...
+set(CMAKE_CXX_EXTENSIONS ON) #...without compiler extensions like gnu++11
+
 option(INSTANT_MESHES_DEV_MODE "Instant meshes developer mode" OFF)
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
