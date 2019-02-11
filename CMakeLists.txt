@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.8.3)
-project(InstantMeshes)
+project(instantMeshes)
 
 option(INSTANT_MESHES_DEV_MODE "Instant meshes developer mode" OFF)
 
@@ -147,7 +147,7 @@ elseif(WIN32)
   set(EXTRA_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/resources/im.rc")
 endif()
 
-add_executable(InstantMeshes MACOSX_BUNDLE
+add_executable(instantMeshes MACOSX_BUNDLE
   resources.cpp
   src/glutil.h src/glutil.cpp
   src/widgets.h src/widgets.cpp
@@ -173,9 +173,9 @@ add_executable(InstantMeshes MACOSX_BUNDLE
   ${EXTRA_SOURCE})
 
 add_definitions(${NANOGUI_EXTRA_DEFS})
-target_link_libraries(InstantMeshes tbb_static nanogui ${NANOGUI_EXTRA_LIBS})
+target_link_libraries(instantMeshes tbb_static nanogui ${NANOGUI_EXTRA_LIBS})
 
-set_target_properties(InstantMeshes PROPERTIES OUTPUT_NAME "instantMeshes")
+set_target_properties(instantMeshes PROPERTIES OUTPUT_NAME "instantMeshes")
 
 if (WIN32)
   # Quench some warnings on MSVC
@@ -184,17 +184,17 @@ if (WIN32)
   endif()
 elseif (APPLE)
   # Build an application bundle on OSX
-  set_target_properties(InstantMeshes PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "instantMeshes")
-  set_target_properties(InstantMeshes PROPERTIES MACOSX_BUNDLE_BUNDLE_GUI_IDENTIFIER "com.im.InstantMeshes")
-  set_target_properties(InstantMeshes PROPERTIES MACOSX_BUNDLE_ICON_FILE im.icns)
-  set_target_properties(InstantMeshes PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/resources/MacOSXBundleInfo.plist.in)
+  set_target_properties(instantMeshes PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME "instantMeshes")
+  set_target_properties(instantMeshes PROPERTIES MACOSX_BUNDLE_BUNDLE_GUI_IDENTIFIER "com.im.instantMeshes")
+  set_target_properties(instantMeshes PROPERTIES MACOSX_BUNDLE_ICON_FILE im.icns)
+  set_target_properties(instantMeshes PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/resources/MacOSXBundleInfo.plist.in)
   set_source_files_properties(resources/im.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 else()
   # Insulate from a few types of ABI changes by statically linking against libgcc and libstdc++
-  set_target_properties(InstantMeshes PROPERTIES LINK_FLAGS "-static-libgcc")
-  #set_target_properties(InstantMeshes PROPERTIES LINK_FLAGS "-static-libgcc -static-libstdc++")
+  set_target_properties(instantMeshes PROPERTIES LINK_FLAGS "-static-libgcc")
+  #set_target_properties(instantMeshes PROPERTIES LINK_FLAGS "-static-libgcc -static-libstdc++")
 endif()
 
 if (UNIX AND NOT ${U_CMAKE_BUILD_TYPE} MATCHES DEBUG)
-  add_custom_command(TARGET InstantMeshes POST_BUILD COMMAND strip $<TARGET_FILE:InstantMeshes>)
+  add_custom_command(TARGET instantMeshes POST_BUILD COMMAND strip $<TARGET_FILE:instantMeshes>)
 endif()
