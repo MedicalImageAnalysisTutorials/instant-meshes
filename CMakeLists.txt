@@ -7,6 +7,10 @@ set(CMAKE_CXX_EXTENSIONS ON) #...without compiler extensions like gnu++11
 
 option(INSTANT_MESHES_DEV_MODE "Instant meshes developer mode" OFF)
 
+mark_as_advanced( instantMeshes_RUNTIME_DIR )
+set( instantMeshes_RUNTIME_DIR "bin" CACHE STRING
+  "Directory for installing runtime files; path is relative to CMAKE_INSTALL_PREFIX" )
+
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "Setting build type to 'Release' as none was specified.")
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
@@ -202,3 +206,7 @@ endif()
 if (UNIX AND NOT ${U_CMAKE_BUILD_TYPE} MATCHES DEBUG)
   add_custom_command(TARGET instantMeshes POST_BUILD COMMAND strip $<TARGET_FILE:instantMeshes>)
 endif()
+
+install( TARGETS instantMeshes
+  RUNTIME DESTINATION ${instantMeshes_RUNTIME_DIR}
+  COMPONENT RuntimeLibraries )
